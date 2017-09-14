@@ -1,6 +1,6 @@
 ## About
 
-This is a slightly modified version of the extractor found (here)[https://github.com/ThomasLech/CROHME_extractor]. The main modifications were using PIL.ImageDraw instead of scikit-image to draw lines, so the extract script now draws realistic lines of a given thickness (default 3px), and all of the output images are now saved to a folder instead of a pickle binary. The point of drawing realistic lines is that some models, especially CNNs, seem to do poorly when lines have no thickness (no edges to detect!). With images extracted from this modified version, I am able to run a AC-GAN model to conditionally generate new math symbols, whereas I was not able to do this with the original extractor.
+This is a slightly modified version of the extractor found [here](https://github.com/ThomasLech/CROHME_extractor). The main modifications were using PIL.ImageDraw instead of scikit-image to draw lines, so the extract script now draws realistic lines of a given thickness (default 3px), and also all of the output images are now saved to a folder instead of a pickle binary. The point of drawing realistic lines is that some models, especially CNNs, seem to do poorly when lines have no thickness (no edges to detect!). With images extracted from this modified version, I am able to run a AC-GAN model to conditionally generate new math symbols, whereas I was not able to do this with the original extractor.
 
 This is a dataset of handwritten math symbols, which can be generated at any size so that they can be a drop-in for many datasets, including MNIST.
 
