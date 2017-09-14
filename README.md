@@ -1,13 +1,11 @@
-## Abstract
-CROHME datasets originally exhibit features designed for _Online-handwritting_ recognition task.  
-Apart from drawn traces being encoded, inkml files also contain trace drawing time captured.
-So we need to extract new feature map, namely matrices of pixel intensities.
+## About
 
-The following scripts will get you started with _Offline math symbols recognition_ task.
+This is a slightly modified version of the extractor found (here)[https://github.com/ThomasLech/CROHME_extractor]. The main modifications were using PIL.ImageDraw instead of scikit-image to draw lines, so the extract script now draws realistic lines of a given thickness (default 3px), and all of the output images are now saved to a folder instead of a pickle binary. 
 
+This is a dataset of handwritten math symbols, which can be generated at any size so that they can be a drop-in for many datasets, including MNIST.
 
 ## Setup
-Python version we use is **3.5.0**.
+Python version I use **3.5.0**.
 
 1. Extract **_CROHME_full_v2.zip_**(found inside **_data_** directory) contents before running any of the above scripts.
 
@@ -38,14 +36,7 @@ With this script, you have more control over data being extracted, namely:
     **Plot**:
     ![crohme_extractor_plot](https://user-images.githubusercontent.com/22115481/30137213-9c619b0a-9362-11e7-839a-624f08e606f7.png)
 
-3. **_parse.py_** script will extract **square-shaped** bitmaps.  
-You can specify bitmap size with `bitmap_size` command line flag(argument).  
-Patterns drawn are then **centered** inside **square-shaped** bitmaps.  
-Example of script execution: `python parse.py 50`  <-- extracts 50x50 bitmaps.  
-This script combines samples extracted from all training sets and all test sets respectively and dumps into 2 separate files.  
-
-
-4. **_extract_hog.py_** script will extract **HoG features**.  
+3. **_extract_hog.py_** script will extract **HoG features**.  
 This script accepts 1 command line argument, namely **hog_cell_size**.  
 **hog_cell_size** corresponds to **pixels_per_cell** parameter of **skimage.feature.hog** function.  
 We use **skimage.feature.hog** to extract HoG features.  
@@ -53,13 +44,13 @@ Example of script execution: `python extract_hog.py 5`  <-- pixels_per_cell=(5, 
 This script loads data previously dumped by **_parse.py_** and again dumps its outputs(train, test) separately.
 
 
-5. **_extract_phog.py_** script will extract **PHoG features**.  
+4. **_extract_phog.py_** script will extract **PHoG features**.  
 For PHoG features, HoG feature maps using different cell sizes are concatenated into a single feature vector.  
 So this script takes arbitrary number of **hog_cell_size** values(HoG features have to be previously extracted with **_extract_hog.py_**)  
 Example of script execution: `python extract_phog.py 5 10 20` <-- loads HoGs with respectively 5x5, 10x10, 20x20 cell sizes.
 
 
-6. **_histograms_** folder contains histograms representing **distribution of labels** based on different label categories. These diagrams help you better understand extracted data.
+5. **_histograms_** folder contains histograms representing **distribution of labels** based on different label categories. These diagrams help you better understand extracted data.
 
 
 ## Distribution of labels
