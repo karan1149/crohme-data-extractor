@@ -1,4 +1,4 @@
-## About
+## CROHME Data Extractor
 
 
 This is a series of scripts for extracting and analyzing the CROHME dataset of handwritten math symbols. Images are in a format (InkXML) that allows them to be scaled and generated at any size so that they can be a drop-in for many datasets, including MNIST. Image extraction settings can be easily configured to make the images work better with certain types of models (e.g. CNNs). 
