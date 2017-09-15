@@ -1,31 +1,31 @@
 ## About
 
-This is a slightly modified version of the extractor found [here](https://github.com/ThomasLech/CROHME_extractor). The main modifications were using PIL.ImageDraw instead of scikit-image to draw lines, so the extract script now draws realistic lines of a given thickness (default 3px), and also all of the output images are now saved to a folder instead of a pickle binary. The point of drawing realistic lines is that some models, especially CNNs, seem to do poorly when lines have no thickness (no edges to detect!). With images extracted from this modified version, I am able to run a AC-GAN model to conditionally generate new math symbols, whereas I was not able to do this with the original extractor.
 
-This is a dataset of handwritten math symbols, which can be generated at any size so that they can be a drop-in for many datasets, including MNIST.
+This is a series of scripts for extracting and analyzing the CROHME dataset of handwritten math symbols. Images are in a format (InkXML) that allows them to be scaled and generated at any size so that they can be a drop-in for many datasets, including MNIST. Image extraction settings can be easily configured to make the images work better with certain types of models (e.g. CNNs). 
+
+This is a slightly modified version of the extractor found [here](https://github.com/ThomasLech/CROHME_extractor). The main modifications were using PIL.ImageDraw instead of scikit-image to draw lines, so the extract script now draws realistic lines of a desired thickness (default 3px), and also all of the output images are now saved to a folder instead of a pickle binary. The point of drawing realistic lines is that some models, especially CNNs, seem to do poorly when lines have no thickness (no edges to detect!). With images extracted from this modified version, I am able to run a AC-GAN model to conditionally generate new math symbols, whereas I was not able to do this with the original extractor.
 
 ## Setup
-Python version I use **3.5.0**.
+Python version: **3.5**.
 
-1. Extract **_CROHME_full_v2.zip_**(found inside **_data_** directory) contents before running any of the above scripts.
+1. Extract **_CROHME_full_v2.zip_** (found inside **_data_** directory) contents before running any of the above scripts.
 
-2. Install specified dependencies with pip (Python Package Manager) using the following shell command:
-```
+2. Install specified dependencies with pip (Python Package Manager) using the following command:
+``` bash
 pip install -U -r requirements.txt
 ```
 
 
 ## Scripts info
 1. **_extract.py_** script will extract **square-shaped** bitmaps.  
-With this script, you have more control over data being extracted, namely:
+With this script, you have control over data being extracted, namely:
     * Extracting data belonging to certain dataset version.
     * Extracting certain categories of classes, like **digits** or **greek** (see categories.txt for details).
+    * Extracting images with line strokes drawn of any desired thickness (default 3px)
     
     **Usage**: `python extract.py <out_format> <box_size> <dataset_version=2013> <category=all>`
 
     **Example usage**: `python extract.py pixels 32 2011+2012+2013 digits+operators+lowercase_letters+greek`
-
-    **Caution**: Other output formats than pixels, **do not** work yet.
 
 2. **_visualize.py_** script will plot single figure containing a random batch of your **extracted** data.
 
